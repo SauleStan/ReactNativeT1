@@ -11,10 +11,13 @@ export default function App() {
   const nextColor = 'green';
 
   const [boxColor1, setBoxColor1] = useState(initialColor);
-  const [colorSwitch1, setColorSwitch1] = useState(false);
   const [boxColor2, setBoxColor2] = useState(initialColor);
   const [boxColor3, setBoxColor3] = useState(initialColor);
   const [boxColor4, setBoxColor4] = useState(initialColor);
+  const [colorSwitch1, setColorSwitch1] = useState(false);
+  const [colorSwitch2, setColorSwitch2] = useState(false);
+  const [colorSwitch3, setColorSwitch3] = useState(false);
+  const [colorSwitch4, setColorSwitch4] = useState(false);
 
   const prevColorRef = useRef;
   useEffect(()=>{
@@ -31,14 +34,41 @@ export default function App() {
       setColorSwitch1(false);
     }
   }
+  function switchColor2(){
+    if(colorSwitch2 == false){
+      setBoxColor2(nextColor);
+      setColorSwitch2(true);
+    }else{
+      setBoxColor2(prevColor);
+      setColorSwitch2(false);
+    }
+  }
+  function switchColor3(){
+    if(colorSwitch3 == false){
+      setBoxColor3(nextColor);
+      setColorSwitch3(true);
+    }else{
+      setBoxColor3(prevColor);
+      setColorSwitch3(false);
+    }
+  }
+  function switchColor4(){
+    if(colorSwitch4 == false){
+      setBoxColor4(nextColor);
+      setColorSwitch4(true);
+    }else{
+      setBoxColor4(prevColor);
+      setColorSwitch4(false);
+    }
+  }
 
   return (
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
         <AppButton onPress={switchColor1} title="Button1"/>
-        <AppButton onPress={() => {setBoxColor2(changedColor)}} title="Button2"/>
-        <AppButton onPress={() => {setBoxColor3(changedColor)}} title="Button3"/>
-        <AppButton onPress={() => {setBoxColor4(changedColor)}} title="Button4"/>
+        <AppButton onPress={switchColor2} title="Button2"/>
+        <AppButton onPress={switchColor3} title="Button3"/>
+        <AppButton onPress={switchColor4} title="Button4"/>
       </View>
       <View style={styles.boxContainer}>
         <BoxComponent color={boxColor1} text={"BOX1"}></BoxComponent>
