@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 //import './styles/components.css';
 import AppButton from './components/buttonComponent';
@@ -8,20 +8,34 @@ import BoxComponent from './components/boxComponent';
 export default function App() {
 
   const initialColor = 'crimson';
-  const changedColor = 'green';
+  const nextColor = 'green';
 
   const [boxColor1, setBoxColor1] = useState(initialColor);
+  const [colorSwitch1, setColorSwitch1] = useState(false);
   const [boxColor2, setBoxColor2] = useState(initialColor);
   const [boxColor3, setBoxColor3] = useState(initialColor);
   const [boxColor4, setBoxColor4] = useState(initialColor);
 
-  // const prevColorRef = useRef();
-  // prevColorRef.current = 'crimson';
+  const prevColorRef = useRef;
+  useEffect(()=>{
+    prevColorRef.current = boxColor1;
+  });
+  const prevColor = prevColorRef.current;
+
+  function switchColor1(){
+    if(colorSwitch1 == false){
+      setBoxColor1(nextColor);
+      setColorSwitch1(true);
+    }else{
+      setBoxColor1(prevColor);
+      setColorSwitch1(false);
+    }
+  }
 
   return (
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
-        <AppButton onPress={() => {setBoxColor1(changedColor)}} title="Button1"/>
+        <AppButton onPress={switchColor1} title="Button1"/>
         <AppButton onPress={() => {setBoxColor2(changedColor)}} title="Button2"/>
         <AppButton onPress={() => {setBoxColor3(changedColor)}} title="Button3"/>
         <AppButton onPress={() => {setBoxColor4(changedColor)}} title="Button4"/>
